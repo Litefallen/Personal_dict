@@ -18,13 +18,8 @@ def open_xlsx_file():
         ws['C1'] = 'word_meaning'
         ws['D1'] = 'russian_translation'
         wb.save('dictionary.xlsx')
-    # print(type(ws.max_row))
     dictionary_workbook = ws
-    # print(ws.max_row)
     return dictionary_workbook
-
-open_xlsx_file()
-
 
 def save_word(word_m_t:tuple):
     wb = open_xlsx_file()
@@ -36,12 +31,3 @@ def save_word(word_m_t:tuple):
     ws[f'C{max_row+1}'] = word_m_t[1]
     ws[f'D{max_row+1}'] = word_m_t[2]
     wb.save('dictionary.xlsx')
-
-# save_word(('english initial word','meaning of the word', 'translation of the word'))
-
-
-
-
-
-
-# wb.save('dictionary.xlsx')

@@ -1,19 +1,17 @@
 from random import randint
-from database import get_all_words
+from to_xls import open_xlsx_file
+all_words = [i[1:] for i in open_xlsx_file().values][1:]
 
-
-all_words = get_all_words()
-
-
-def choose_num(values_list): # add error check
-    choose_number = int(input('Please type the corresponding number: '))-1
-    if choose_number not in range(len(values_list)):
+def choose_num(values_list):
+    choose_number = input('Please type the corresponding number: ')
+    if not choose_number.isdigit() or int(choose_number)-1 not in range(len(values_list)) :
+        print('The number you provided is invalid..')
         return choose_num(values_list)
     else:
-        return choose_number
-    
+        return int(choose_number)-1
+choose_num([5,1,2,4])   
 
-def select_values(words_list:list, word_to_test, test_type:str,  options_amount:int=0):
+def select_values(words_list:tuple, word_to_test, test_type:str,  options_amount:int=0):
     if options_amount:
         final_list = [words_list[randint(0, len(words_list)-1)] for _ in range(options_amount)]
         final_list.append(word_to_test)
