@@ -3,7 +3,7 @@ import dotenv
 import os
 import requests
 import json
-
+from to_xls import save_word
 
 dotenv.load_dotenv()
 def search_for_word():
@@ -20,10 +20,11 @@ def search_for_word():
     for meaning in word_meanings:
         print('\t- '+meaning)
     word_meanings = ';'.join(word_meanings)
-    # context = input(f'Please provide example of the expression using the {word} word for more precise transtlation. Press "enter" to skip.')
-    # if context:
-    #     word_translation = str(translator.translate_text(f'{word}',target_lang="RU", source_lang='EN',context=context))
-    # else:
-    #     word_translation = str(translator.translate_text(f'{word}',target_lang="RU", source_lang='EN'))
-    # print(word_translation)
-    # save_word((word, word_meanings, word_translation))
+    context = input(f'Please provide example of the expression using the {word_to_find} word for more precise transtlation OR press "enter" to skip this. ')
+    if context:
+        word_translation = str(translator.translate_text(f'{word_to_find}',target_lang="RU", source_lang='EN',context=context))
+    else:
+        word_translation = str(translator.translate_text(f'{word_to_find}',target_lang="RU", source_lang='EN'))
+    print(f"This is the translation of the word {word_to_find}: {word_translation}")
+    save_word((word_to_find, word_meanings, word_translation))
+    print('The word was saved.')

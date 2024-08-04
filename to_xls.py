@@ -18,7 +18,7 @@ def open_xlsx_file():
         ws['C1'] = 'word_meaning'
         ws['D1'] = 'russian_translation'
         wb.save('dictionary.xlsx')
-    dictionary_workbook = ws
+    dictionary_workbook = wb
     return dictionary_workbook
 
 def save_word(word_m_t:tuple):
@@ -31,3 +31,12 @@ def save_word(word_m_t:tuple):
     ws[f'C{max_row+1}'] = word_m_t[1]
     ws[f'D{max_row+1}'] = word_m_t[2]
     wb.save('dictionary.xlsx')
+
+def get_all_words():
+    wb = open_xlsx_file()
+    ws = wb['Dictionary']
+    all_words = [i for i in ws.values][1:]
+    all_words = [[i[0],i[1],sorted(i[2].split(';'),key=lambda x: len(x))[0].strip(',;. '),i[3]] for i in all_words] # add only one meaning of the word
+    return all_words
+
+
