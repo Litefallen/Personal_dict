@@ -3,6 +3,10 @@ import os
 
 
 def open_xlsx_file():
+    print('Please, provide the full path to the xlsx file,')
+    the_path = input('Or press "enter" to use default app folder: ').replace('\\','/') # replace windows backslashes in path
+    if the_path:
+        os.chdir(the_path)
     try:  # check is xlsx file exist
         wb = load_workbook('dictionary.xlsx')
     except FileNotFoundError:
@@ -22,11 +26,12 @@ def open_xlsx_file():
         ws['D1'] = 'russian_translation'
         wb.save('dictionary.xlsx')
     dictionary_workbook = wb
+    print(f'The xlsx  file tith all words could be found in "{os.getcwd()}" folder.')
     return dictionary_workbook
+open_xlsx_file()
 
-
-def save_word(word_m_t: tuple):
-    wb = open_xlsx_file()
+def save_word(word_m_t: tuple,workbook):
+    wb = workbook
     ws = wb['Dictionary']
     max_row = ws.max_row
     # save initial word, meaning and translation to cells
@@ -35,11 +40,10 @@ def save_word(word_m_t: tuple):
     ws[f'C{max_row+1}'] = word_m_t[1]
     ws[f'D{max_row+1}'] = word_m_t[2]
     wb.save('dictionary.xlsx')
-    print(f'The xlsx  file tith all words could be found in "{os.getcwd()}" folder.')
 
 
-def get_all_words():
-    wb = open_xlsx_file()
+def get_all_words(workbook):
+    wb = workbook
     ws = wb['Dictionary']
     all_words = [i for i in ws.values][1:]
     # add only one meaning of the word for not cluttering terminal screen sake 
