@@ -9,7 +9,7 @@ api_key = os.environ.get('API_KEY') # get api key from dotenv file
 translator = deepl.Translator(api_key)
 
 
-def search_for_word():
+def search_for_word(workbook):
     word_to_find = input('Please, type the word: ')
     word_definitions = requests.get(# get the meaning of the word
         f'https://api.dictionaryapi.dev/api/v2/entries/en/{word_to_find}').json()
@@ -33,5 +33,5 @@ def search_for_word():
             f'{word_to_find}', target_lang="RU", source_lang='EN'))
     print(f"This is the translation of the word {
           word_to_find}: {word_translation}")
-    save_word((word_to_find, word_meanings, word_translation))
+    save_word((word_to_find, word_meanings, word_translation),workbook)
     print('The word was saved.')

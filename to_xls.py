@@ -1,7 +1,6 @@
 from openpyxl import Workbook, load_workbook
 import os
 
-
 def open_xlsx_file():
     print('Please, provide the full path to the xlsx file,')
     the_path = input('Or press "enter" to use default app folder: ').replace('\\','/') # replace windows backslashes in path
@@ -28,7 +27,7 @@ def open_xlsx_file():
     dictionary_workbook = wb
     print(f'The xlsx  file tith all words could be found in "{os.getcwd()}" folder.')
     return dictionary_workbook
-open_xlsx_file()
+
 
 def save_word(word_m_t: tuple,workbook):
     wb = workbook

@@ -1,8 +1,8 @@
 from random import randint
-from to_xls import open_xlsx_file
+# from to_xls import open_xlsx_file
 
-all_words = open_xlsx_file()['Dictionary']
-all_words = [i[1:] for i in all_words.values][1:]
+# all_words = open_xlsx_file()['Dictionary']
+# all_words = [i[1:] for i in all_words.values][1:]
 
 
 def choose_num(values_list):
@@ -30,19 +30,23 @@ def select_values(words_list: tuple, word_to_test, test_type: str,  options_amou
         return list(enumerate([i[1] for i in final_list], start=1))
 
 
-def skillcheck(rounds: int): # rounds - amount of words in test
+def skillcheck(rounds: int,workbook): # rounds - amount of words in test
+    all_words = workbook['Dictionary']
+    all_words = [i[1:] for i in all_words.values][1:]
     for _ in range(rounds):
         for i in enumerate(('Show english word;', 'show meaning of the word;', 'show russian translation.'), start=1):
-            print(f"{i[0]}: {i[1]}", end=' ')
+            print(f"{i[0]}: {i[1]}", end='\t')
         print()
         test_by = choose_num([1, 2, 3])
         random_word = all_words[randint(0, len(all_words)-1)]
         if test_by == 0:
             print(random_word[0])
             translation_list = select_values(
-                all_words, random_word, 'translation_ru', options_amount=3)
+                all_words, random_word, 'translation_ru')
             for i in translation_list:
-                print(i[0], i[1])
+                print(i[0], i[1], end='\t')
+            print()
+
             chosen_var = int(input(f'Please choose the correct translation for "{
                              random_word[0]}" word: ')) - 1
             if translation_list[chosen_var][1] == random_word[2]:
@@ -52,9 +56,10 @@ def skillcheck(rounds: int): # rounds - amount of words in test
         if test_by == 1:
             print(random_word[1])
             translation_list = select_values(
-                all_words, random_word, 'translation_ru', options_amount=3)
+                all_words, random_word, 'translation_ru')
             for i in translation_list:
-                print(i[0], i[1])
+                print(i[0], i[1],end='\t')
+            print()
             chosen_var = int(input(f'Please choose the correct translation for the meaning of the {
                              random_word[0]} word: ')) - 1
             print(random_word[2], translation_list[chosen_var][1])
@@ -65,9 +70,11 @@ def skillcheck(rounds: int): # rounds - amount of words in test
         if test_by == 2:
             print(random_word[2])
             translation_list = select_values(
-                all_words, random_word, 'translation_en', options_amount=3)
+                all_words, random_word, 'translation_en')
             for i in translation_list:
-                print(i[0], i[1])
+                print(i[0], i[1],end='\t')
+            print()
+
             chosen_var = int(input(f'Please choose the correct translation for "{
                              random_word[2]}" word: ')) - 1
             if translation_list[chosen_var][1] == random_word[0]:
