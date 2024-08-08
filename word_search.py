@@ -15,7 +15,7 @@ def search_for_word(workbook):
         f'https://api.dictionaryapi.dev/api/v2/entries/en/{word_to_find}').json()
     if isinstance(word_definitions, dict):
         print('No definitions found for the word. Please, check the word for typos.')
-        return search_for_word()
+        return search_for_word(workbook)
     word_definitions = word_definitions[0]['meanings'][0]['definitions']
     word_meanings = [i['definition'] for i in word_definitions][:3] # get only 3 word meanings
     print(f'Here are meanings of the "{word_to_find}" word: ')
