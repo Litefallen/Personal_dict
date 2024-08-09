@@ -16,7 +16,8 @@ while True:
         continue
 
     if choice == 1:
-        skillcheck(2, workbook)  # add input for amount of rounds
+        rounds = 5 # amount of the words in a test
+        skillcheck(rounds, workbook)
         continue
 
     if choice == 2:

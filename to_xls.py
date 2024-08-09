@@ -45,7 +45,7 @@ def get_all_words(workbook):
     wb = workbook
     ws = wb['Dictionary']
     all_words = [i for i in ws.values][1:]
-    # add only one meaning of the word for not cluttering terminal screen sake 
+    # add only the shortest meaning of the word to not clutter terminal screen
     all_words = [[i[0], i[1], sorted(i[2].split(';'), key=len)[
         0].strip(',;. '), i[3]] for i in all_words]
     return all_words
