@@ -31,17 +31,8 @@ def search_for_word(workbook):
         word_translation = str(translator.translate_text(
             f'{word_to_find}', target_lang="RU", source_lang='EN', context=context))
     else:
-        word_translation = str(translator.translate_text(
-            f'{word_to_find}', target_lang="RU", source_lang='EN')).strip()
-    # print('There are the word, its possible meanings and translation:')
-    # print(word_to_find)
-    # print(word_meanings, sep='\t- ')
-    print(f'The translation of the word is: {word_translation}')
-    print('Would you like to save the word to the file?')
-    print('1.Yes\t2.No')
-    choice = choose_num([1,2])
-    if choice==0:
-        save_word((word_to_find, word_meanings, word_translation),workbook)
-        print('The word was saved.')
-    else:
-        search_for_word(workbook)
+        word_translation = str(translator.translate_text(f'{word_to_find}', target_lang="RU", source_lang='EN'))
+    print(f"This is the translation of the word {
+          word_to_find}: {word_translation}")
+    save_word((word_to_find, word_meanings, word_translation),workbook)
+    print('The word was saved.')
