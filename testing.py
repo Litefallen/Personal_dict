@@ -39,9 +39,7 @@ def select_values(words_list: list, word_to_test, test_type: str):
         return list(enumerate([i[2] for i in final_list], start=1))
     if test_type == 'translation_en':
         return list(enumerate([i[0] for i in final_list], start=1))
-    if test_type == 'meaning_en':
-        return list(enumerate([i[1] for i in final_list], start=1))
-
+  
 
 def skillcheck(rounds: int, workbook):  # rounds - amount of words in test
     all_words = workbook['Dictionary']
@@ -79,7 +77,6 @@ def skillcheck(rounds: int, workbook):  # rounds - amount of words in test
             print()
             chosen_var = int(
                 input(f'Please choose the correct translation for the meanings above: ')) - 1
-            print(random_word[2], translation_list[chosen_var][1])
             if translation_list[chosen_var][1] == random_word[2]:
                 print('You are right! Good job!')
             else:

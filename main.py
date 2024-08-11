@@ -5,10 +5,9 @@ from to_xls import get_all_words, open_xlsx_file
 
 
 workbook = open_xlsx_file()
-keyboard.add_hotkey('ctrl+shift+right', print, args=(''))
 while True:
-    print('Press "ctrl+shift+right" to start the app.')
-    keyboard.wait('ctrl+shift+right')  # waking up an app with a hotkey
+    print('Press "shift+right" to start the app.')
+    keyboard.wait('shift+right')  # waking up an app with a hotkey. Change it to the shortcut you prefer
     print('1. Add word', '2. Test yourself', '3. See all words')
     choice = choose_num([1, 2, 3])
     if choice == 0:

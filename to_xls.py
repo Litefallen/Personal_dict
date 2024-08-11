@@ -25,7 +25,7 @@ def open_xlsx_file():
         ws['D1'] = 'russian_translation'
         wb.save('dictionary.xlsx')
     dictionary_workbook = wb
-    print(f'The xlsx  file tith all words could be found in "{os.getcwd()}" folder.')
+    print(f'The xlsx file with all words could be found in "{os.getcwd()}" folder.')
     return dictionary_workbook
 
 
